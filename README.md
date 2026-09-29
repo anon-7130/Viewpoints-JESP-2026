@@ -5,7 +5,6 @@ This repo contains data, analysis scripts, and supplementary material for the Re
 ## Repo structure
 
 ```
-├── manuscript/                 Stage 1 manuscript
 ├── 1_developmental_studies/    Developmental Studies 1 & 2 (lab-based eye tracking)
 ├── 2_stimuli_validation/       Stimulus validation pretest
 │   ├── data/raw/
