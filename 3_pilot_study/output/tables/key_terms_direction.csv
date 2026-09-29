@@ -1,9 +1,0 @@
-"hypothesis","term","predicted_sign","measure","re_spec","n_participants","n_obs","estimate","se","direction_matches","sharing_quadratic","rr_h2_flip_met","p_value","p_one_sided"
-"H1","I(agreement_c^2)","negative","Personal Agreement","re_stimulus",99,8710,-18.42434144416,5.14246076678668,TRUE,NA,NA,0.000341820135213732,0.000170910067606866
-"H2","I(agreement_c^2):Conditionsharing","positive","Personal Agreement","re_stimulus",99,8710,25.0510059561453,7.16610293038584,TRUE,6.62666451198533,TRUE,0.000475080865770732,0.000237540432885366
-"H1","I(agreement_c^2)","negative","Perceived Social Media Contacts Agreement","re_stimulus",99,8710,-12.7034912142426,5.09273931733305,TRUE,NA,NA,0.0126344442605262,0.00631722213026309
-"H2","I(agreement_c^2):Conditionsharing","positive","Perceived Social Media Contacts Agreement","re_stimulus",99,8710,18.0354708362259,7.4656234404032,TRUE,5.33197962198323,TRUE,0.0157212218494577,0.00786061092472886
-"H1","I(agreement_c^2)","negative","Personal Agreement","re_topic",99,8710,-18.5211828335247,5.14737708675495,TRUE,NA,NA,0.000322251580946273,0.000161125790473137
-"H2","I(agreement_c^2):Conditionsharing","positive","Personal Agreement","re_topic",99,8710,24.9965818073724,7.16678387758898,TRUE,6.4753989738477,TRUE,0.00048936917385508,0.00024468458692754
-"H1","I(agreement_c^2)","negative","Perceived Social Media Contacts Agreement","re_topic",99,8710,-12.7798348691928,5.09580373598833,TRUE,NA,NA,0.012162867328091,0.0060814336640455
-"H2","I(agreement_c^2):Conditionsharing","positive","Perceived Social Media Contacts Agreement","re_topic",99,8710,17.9652418413375,7.46590621918056,TRUE,5.18540697214466,TRUE,0.0161357361741389,0.00806786808706944

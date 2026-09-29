@@ -16,6 +16,7 @@ rt_csv <- paste0(export_path, "_reaction_times.csv") # Same layout, "_RT_ms" col
 et_csv <- paste0(export_path, "_eye_tracking.csv") # One row per gaze sample
 stimuli_xlsx <- "../2_stimuli_validation/stimuli_updated.xlsx"
 stimuli_sheet <- "Selected stimuli 88" # Holds more rows than the 88 fielded posts, so it is filtered to the posts in the data
+pretest_csv <- "../2_stimuli_validation/data/processed/clean_data.csv" # Pretest placements written by clean_data.py
 derived_dir <- "data/derived"
 output_dir <- "./output"
 
@@ -38,8 +39,9 @@ mc_component <- "Manipulation Check 2" # The eye-tracking export lists every opt
 chosen_key <- "ArrowLeft" # Follow/share; ArrowRight = not follow/not share
 stage1_keys <- c("ArrowLeft", "ArrowRight")
 
-position_codes <- c("Extreme left" = -2, "Left" = -1, "Right" = 1, "Extreme right" = 2) # Researcher-coded "Target category"
+position_codes <- c("Extreme left" = -2, "Left" = -1, "Right" = 1, "Extreme right" = 2) # Researcher-coded "Target category"; checks the design balance only
 statements_per_topic_position <- 2
+pretest_scale_centre <- 3 # Pretest placements run 1 (far left) to 5 (far right); subtracting 3 gives the -2..+2 statement positions
 
 ##### Parameters #####
 # Fixation detection (I-DT)
@@ -158,7 +160,7 @@ coefs <- function(m) { # Works for lmerTest (t, df, p), lme4 lmer (t only), glme
 }
 
 ##### Responses #####
-loadResponses <- function(resp_csv, rt_csv, stimuli_xlsx, stimuli_sheet) {
+loadResponses <- function(resp_csv, rt_csv, stimuli_xlsx, stimuli_sheet, pretest_csv) {
     readWideExport <- function(path) {
         d <- read.csv(path, check.names = FALSE, colClasses = "character")
         d[!is.na(d$`Participant ID`) & nzchar(d$`Participant ID`), , drop = FALSE] # Row 1 below the header is the question-text row, not a participant
@@ -213,24 +215,32 @@ loadResponses <- function(resp_csv, rt_csv, stimuli_xlsx, stimuli_sheet) {
         mutate(across(c(agreement_personal, agreement_contacts), as.numeric)) %>%
         left_join(rt_long, by = c("participantId", "componentId"))
 
+    pretest_positions <- read.csv(pretest_csv) %>% # Thurstone scale value: the median placement by the independent pretest raters
+        filter(response_type == "LIKERT_GRID", !is.na(target_category), !is.na(response_value)) %>%
+        group_by(componentTitle = component_title) %>%
+        summarise(position = median(response_value) - pretest_scale_centre, .groups = "drop")
+
     stimuli <- read_excel(stimuli_xlsx, sheet = stimuli_sheet) %>%
         filter(!is.na(`Stimulus ID`)) %>%
         transmute(componentTitle = `Stimulus ID`, topic = Topic,
-                  position = unname(position_codes[`Target category`]))
-    stopifnot(!anyDuplicated(stimuli$componentTitle), !is.na(stimuli$position))
+                  target_position = unname(position_codes[`Target category`])) %>%
+        left_join(pretest_positions, by = "componentTitle")
+    stopifnot(!anyDuplicated(stimuli$componentTitle), !is.na(stimuli$target_position))
 
     components <- resp_items %>%
         distinct(componentId, componentTitle, block) %>%
         mutate(variant = str_remove_all(str_extract(componentTitle, post_variant_re), "[^[:alnum:]]")) %>%
         left_join(stimuli, by = "componentTitle")
-    stopifnot(!anyDuplicated(components$componentId), !is.na(components$position))
+    stopifnot(!anyDuplicated(components$componentId), !is.na(components$target_position), !is.na(components$position))
 
     viewing_ids <- components$componentId[components$block %in% condition_blocks] # Stage 1
     rating_ids <- components$componentId[components$block == stage2_block] # Stage 2
 
     stimuli <- filter(stimuli, componentTitle %in% components$componentTitle)
-    stopifnot(all(count(stimuli, topic, position)$n == statements_per_topic_position), # Direction and extremity must vary independently of topic
-              n_distinct(stimuli$position) == length(position_codes))
+    stopifnot(all(count(stimuli, topic, target_position)$n == statements_per_topic_position), # Direction and extremity must vary independently of topic
+              n_distinct(stimuli$target_position) == length(position_codes))
+    message(sprintf("  pretest positions match the target category for %d of %d posts",
+                    sum(stimuli$position == stimuli$target_position), nrow(stimuli)))
     message(sprintf("  %d posts: %d topics x %d positions x %d statements",
                     nrow(stimuli), n_distinct(stimuli$topic), length(position_codes), statements_per_topic_position))
 
@@ -629,17 +639,20 @@ exclusionGates <- function(responses, participant_results, manipulation_check, g
 dvDescriptives <- function(trial_reading, prevalence, analysis_sample, components, saccades, horiz_tol_deg, output_dir = "./output") {
     analysis_ids <- analysis_sample$participantId
 
-    print(as.data.frame(trial_reading %>%
-        left_join(analysis_sample, by = "participantId") %>%
+    trials_by_condition <- left_join(trial_reading, analysis_sample, by = "participantId")
+    dv_summary <- bind_rows(trials_by_condition, mutate(trials_by_condition, Condition = "all")) %>% # "all" row: the zero-trial share quoted in the text
+        mutate(Condition = fct_inorder(as.character(Condition))) %>%
         group_by(Condition) %>%
         summarise(
             n_participants      = n_distinct(participantId),
             n_trials            = n(),
-            pct_trials_zero     = round(100 * mean(!has_reading_pattern), 1),
-            mean_runs_per_trial = round(mean(n_reading_runs), 2),
-            mean_dwell_ms       = round(mean(reading_dwell_ms), 1),
+            pct_trials_zero     = 100 * mean(!has_reading_pattern),
+            mean_runs_per_trial = mean(n_reading_runs),
+            mean_dwell_ms       = mean(reading_dwell_ms),
             .groups             = "drop"
-        )), row.names = FALSE)
+        )
+    saveTable(dv_summary, "dv_descriptives.csv", output_dir)
+    print(as.data.frame(mutate(dv_summary, across(where(is.double), ~ round(.x, 2)))), row.names = FALSE)
 
     prevalence <- mutate(prevalence, in_analysis = participantId %in% analysis_ids)
 
@@ -739,18 +752,15 @@ buildAnalysisTrials <- function(trial_reading, responses, analysis_sample, deriv
 
 ##### Pilot model #####
 pilotModels <- function(analysis_trials, output_dir = "./output") {
-    # Pilot: direction, not significance, is the criterion.
-    #   H1  quadratic agreement term                predicted negative
-    #   H2  quadratic x second condition (sharing)  predicted positive, and larger than |H1| so the quadratic flips sign under sharing
-    # Random effects: (1|componentTitle) + (1|participantId) is the registered primary; adding (1|topic) is the secondary specification
-    fixed_rhs <- "agreement_c + I(agreement_c^2) + Condition + agreement_c:Condition + I(agreement_c^2):Condition"
+    # Quadratic in agreement, standardised across all analysed trials, and its interaction with condition. All p values are two-sided
+    # Random effects: (1|componentTitle) + (1|participantId) is the primary; adding (1|topic) is the secondary specification
+    fixed_rhs <- "agreement_z + I(agreement_z^2) + Condition + agreement_z:Condition + I(agreement_z^2):Condition"
     re_specs <- c(
         re_stimulus = "(1 | componentTitle) + (1 | participantId)",
         re_topic    = "(1 | topic) + (1 | componentTitle) + (1 | participantId)"
     )
-    h1_term <- "I(agreement_c^2)"
-    h2_term <- paste0(h1_term, ":Condition", conditions[2])
-    key_terms_def <- tibble(term = c(h1_term, h2_term), hypothesis = c("H1", "H2"), predicted_sign = c("negative", "positive"))
+    quad_term <- "I(agreement_z^2)"
+    quad_cond_term <- paste0(quad_term, ":Condition", conditions[2])
 
     measures <- list(
         personal = list(col = "agreement_personal", label = "Personal Agreement",
@@ -765,60 +775,70 @@ pilotModels <- function(analysis_trials, output_dir = "./output") {
             data = d, control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 2e5))))
     }
 
-    coefTable <- function(m) {
-        coefs(m) %>%
-            left_join(key_terms_def, by = "term") %>%
-            mutate(
-                direction_matches   = if_else(predicted_sign == "negative", estimate < 0, estimate > 0),
-                p_one_sided         = if_else(direction_matches, p_value / 2, 1 - p_value / 2)
-            )
-    }
-
-    predictCurve <- function(m, d, n = 100) {
+    predictAt <- function(m, grid) { # grid holds agreement_z and Condition
         z <- qnorm(1 - (1 - ci_level) / 2)
-        grid <- expand.grid(agreement_c = seq(min(d$agreement_c), max(d$agreement_c), length.out = n),
-                            Condition = levels(d$Condition))
         X <- model.matrix(as.formula(paste("~", fixed_rhs)), grid)
         se <- sqrt(rowSums((X %*% as.matrix(vcov(m))) * X))
 
-        grid %>% mutate(agreement = agreement_c + scale_midpoint,
-                        pred = as.numeric(X %*% fixef(m)), lo = pred - z * se, hi = pred + z * se)
+        mutate(grid, pred = as.numeric(X %*% fixef(m)), lo = pred - z * se, hi = pred + z * se)
+    }
+
+    predictCurve <- function(m, d, n = 100) { # Back-transformed to the rating scale for plotting
+        grid <- expand_grid(agreement_z = seq(min(d$agreement_z), max(d$agreement_z), length.out = n),
+                            Condition = factor(conditions, levels = conditions))
+        predictAt(m, grid) %>% mutate(agreement = agreement_z * sd(d$agreement) + mean(d$agreement))
     }
 
     message("Fitting pilot models ...")
     fits <- map(measures, function(ms) {
         d <- analysis_trials %>%
             filter(!is.na(.data[[ms$col]])) %>%
-            mutate(agreement = .data[[ms$col]], agreement_c = agreement - scale_midpoint)
+            mutate(agreement = .data[[ms$col]], agreement_z = as.numeric(scale(agreement)))
         list(data = d, models = map(set_names(names(re_specs)), ~ fitModel(d, .x)))
     })
 
     fixed_effects <- map_dfr(names(re_specs), function(re) map_dfr(names(measures), function(mkey) {
         d <- fits[[mkey]]$data
-        coefTable(fits[[mkey]]$models[[re]]) %>%
+        coefs(fits[[mkey]]$models[[re]]) %>%
             mutate(measure = measures[[mkey]]$label, re_spec = re,
-                   n_participants = n_distinct(d$participantId), n_obs = nrow(d), .before = 1)
+                   n_participants = n_distinct(d$participantId), n_obs = nrow(d),
+                   agreement_mean = mean(d$agreement), agreement_sd = sd(d$agreement), .before = 1)
     }))
     saveTable(fixed_effects, "fixed_effects.csv", output_dir)
 
-    key_terms <- fixed_effects %>% # Registered H2 criterion: the interaction must exceed |H1| so the quadratic flips sign under sharing; direction_matches tests only the sign
-        filter(!is.na(hypothesis)) %>%
-        group_by(measure, re_spec) %>%
-        mutate(
-            sharing_quadratic   = if_else(hypothesis == "H2", sum(estimate), NA_real_),
-            rr_h2_flip_met      = if_else(hypothesis == "H2", estimate > abs(estimate[hypothesis == "H1"]), NA)
-        ) %>%
-        ungroup() %>%
-        select(hypothesis, term, predicted_sign, measure, re_spec, n_participants, n_obs,
-               estimate, se, direction_matches, sharing_quadratic, rr_h2_flip_met, p_value, p_one_sided)
-    saveTable(key_terms, "key_terms_direction.csv", output_dir)
+    random_effects <- map_dfr(names(re_specs), function(re) map_dfr(names(measures), function(mkey) {
+        as.data.frame(VarCorr(fits[[mkey]]$models[[re]])) %>%
+            transmute(measure = measures[[mkey]]$label, re_spec = re, group = grp, sd = sdcor)
+    }))
+    saveTable(random_effects, "random_effects.csv", output_dir)
 
-    message("\nDirection check (p-values are in the tables but are not confirmatory):")
-    print(as.data.frame(key_terms %>%
-        transmute(hypothesis, predicted_sign, measure, re_spec,
-                  n = n_participants, estimate = round(estimate, 2), se = round(se, 2),
-                  direction_matches, sharing_quadratic = round(sharing_quadratic, 2), rr_h2_flip_met)),
-        row.names = FALSE)
+    # Model predictions quoted in the text: dwell time at mean agreement, the peak and trough of each condition's curve, and the two scale extremes
+    curve_summary <- imap_dfr(measures, function(ms, mkey) {
+        d <- fits[[mkey]]$data
+        m <- fits[[mkey]]$models$re_stimulus
+        b <- fixef(m)
+
+        predictCurve(m, d, n = 6001) %>%
+            group_by(Condition) %>%
+            summarise(
+                quadratic           = b[[quad_term]] + (first(Condition) == conditions[2]) * b[[quad_cond_term]],
+                at_mean_ms          = predictAt(m, tibble(agreement_z = 0, Condition = first(Condition)))$pred,
+                max_ms              = max(pred),
+                max_at_z            = agreement_z[which.max(pred)],
+                max_at_rating       = agreement[which.max(pred)],
+                min_ms              = min(pred),
+                min_at_z            = agreement_z[which.min(pred)],
+                min_at_rating       = agreement[which.min(pred)],
+                at_disagreement_ms  = pred[which.min(agreement_z)],
+                at_agreement_ms     = pred[which.max(agreement_z)],
+                .groups             = "drop"
+            ) %>%
+            mutate(measure = ms$label, .before = 1)
+    })
+    saveTable(curve_summary, "curve_summary.csv", output_dir)
+
+    message("\nPilot model predictions (primary random-effects specification):")
+    print(as.data.frame(mutate(curve_summary, across(where(is.numeric), ~ round(.x, 2)))), row.names = FALSE)
 
     # Dwell-by-agreement figures. Lines: model predictions with ci_level bands; points: observed means
     iwalk(measures, function(ms, mkey) {
@@ -847,7 +867,8 @@ pilotModels <- function(analysis_trials, output_dir = "./output") {
     pilot_results <- list(
         fits            = fits,
         fixed_effects   = fixed_effects,
-        key_terms       = key_terms
+        random_effects  = random_effects,
+        curve_summary   = curve_summary
     )
 
     return(pilot_results)
@@ -856,7 +877,7 @@ pilotModels <- function(analysis_trials, output_dir = "./output") {
 ##### Registered-report analyses #####
 # Candidate model set, decision rule, outcome-neutral checks and secondary analyses of the Stage 1 report
 rrDerivedVariables <- function(analysis_trials, ratings, stimuli) {
-    ideal_points <- ratings %>% # Thurstone-style ideal point. Statement position x centred personal rating, averaged within each topic, then across topics
+    ideal_points <- ratings %>% # Thurstone-style ideal point. Pretest statement position x centred personal rating, averaged within each topic, then across topics
         filter(!is.na(agreement_personal)) %>%
         inner_join(stimuli, by = "componentTitle") %>%
         group_by(participantId, topic) %>%
@@ -1094,7 +1115,7 @@ rrSecondaryAnalyses <- function(trial_reading, responses, analysis_sample, outpu
 
 ##### Load data #####
 message("Loading responses ...")
-responses <- loadResponses(resp_csv, rt_csv, stimuli_xlsx, stimuli_sheet)
+responses <- loadResponses(resp_csv, rt_csv, stimuli_xlsx, stimuli_sheet, pretest_csv)
 participant_results <- participantCompletion(responses)
 
 eye <- loadEyeTracking(et_csv, responses, participant_results$completers, derived_dir)

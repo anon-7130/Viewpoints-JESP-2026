@@ -48,7 +48,7 @@ They need Python 3 with `pandas`, `matplotlib`, and `openpyxl`.
 ### 3. Pilot study
 `analysis.R` runs the full pilot analysis: data loading, fixation detection, exclusions, the dwell-time models, and the registered-report model comparison (M0–M6), outcome-neutral checks, and secondary analyses. Tables are written to `output/tables/` and figures to `output/figures/`.
 
-Run it with `3_pilot_study/` as the working directory:
+Statement positions (−2 to +2) are the median placement by the stimulus-validation raters, read from `2_stimuli_validation/data/processed/clean_data.csv`, so run `clean_data.py` first if that file is missing. Run `analysis.R` with `3_pilot_study/` as the working directory:
 
 ```
 cd 3_pilot_study
