@@ -39,7 +39,7 @@ mc_component <- "Manipulation Check 2" # The eye-tracking export lists every opt
 chosen_key <- "ArrowLeft" # Follow/share; ArrowRight = not follow/not share
 stage1_keys <- c("ArrowLeft", "ArrowRight")
 
-position_codes <- c("Extreme left" = -2, "Left" = -1, "Right" = 1, "Extreme right" = 2) # Researcher-coded "Target category"; checks the design balance only
+position_codes <- c("Extreme left" = -2, "Left" = -1, "Right" = 1, "Extreme right" = 2) # Researcher-coded "Target category"
 statements_per_topic_position <- 2
 pretest_scale_centre <- 3 # Pretest placements run 1 (far left) to 5 (far right); subtracting 3 gives the -2..+2 statement positions
 
@@ -49,8 +49,8 @@ fix_dispersion_px <- 60 # Max (xmax - xmin) + (ymax - ymin) within one fixation
 fix_min_duration <- 100 # ms
 gaze_smooth_k <- 3 # Running-median width applied before I-DT; 1 = off
 
-# A saccade is horizontal if its deviation from horizontal axis is at most this quantile of all completers' deviations
-horiz_tol_quantile <- 0.5
+# A saccade is horizontal if its deviation from horizontal axis is at most this many degrees (based on pilot study)
+horiz_tol_deg <- 24.4
 min_sacc_amp_px <- 20
 min_reading_run_saccades <- 2
 
@@ -414,18 +414,12 @@ loadEyeTracking <- function(et_csv, responses, completers, derived_dir = "data/d
     return(eye)
 }
 
-##### Saccades and the horizontal tolerance #####
-saccadeTolerance <- function(fixations) {
-    saccades <- fixations %>%
+##### Saccades #####
+saccadeDeviations <- function(fixations) { # Input to the isotropic benchmark
+    fixations %>%
         group_by(participantId, componentId) %>%
         reframe(dev = horizDeviation(diff(x), diff(y)), amp = sqrt(diff(x)^2 + diff(y)^2)) %>%
         filter(amp >= min_sacc_amp_px)
-
-    horiz_tol_deg <- unname(quantile(saccades$dev, horiz_tol_quantile))
-    message(sprintf("  horizontal tolerance: %.2f deg (quantile %.2f of %d saccades, all completers)",
-                    horiz_tol_deg, horiz_tol_quantile, nrow(saccades)))
-
-    return(list(saccades = saccades, horiz_tol_deg = horiz_tol_deg))
 }
 
 ##### Eye-tracking QC #####
@@ -1119,21 +1113,21 @@ responses <- loadResponses(resp_csv, rt_csv, stimuli_xlsx, stimuli_sheet, pretes
 participant_results <- participantCompletion(responses)
 
 eye <- loadEyeTracking(et_csv, responses, participant_results$completers, derived_dir)
-saccade_results <- saccadeTolerance(eye$fixations)
+saccades <- saccadeDeviations(eye$fixations)
 
 ##### Call QC and exclusion functions #####
 gaze_qc <- gazeRateQC(responses, eye, participant_results, output_dir)
 manipulation_check <- manipulationCheck(responses$resp_wide, participant_results$completion, eye$mc_offered, output_dir)
 
-reading <- readingRuns(eye$fixations, responses, participant_results, saccade_results$horiz_tol_deg)
+reading <- readingRuns(eye$fixations, responses, participant_results, horiz_tol_deg)
 
 exclusions <- exclusionGates(responses, participant_results, manipulation_check, gaze_qc,
                              reading$prevalence, eye$mc_offered, output_dir)
 trial_reading <- filter(reading$trial_reading, participantId %in% exclusions$analysis_ids)
 
 dv_descriptives <- dvDescriptives(trial_reading, reading$prevalence, exclusions$analysis_sample,
-                                  responses$components, saccade_results$saccades,
-                                  saccade_results$horiz_tol_deg, output_dir)
+                                  responses$components, saccades,
+                                  horiz_tol_deg, output_dir)
 
 ##### Call pilot model function #####
 analysis_data <- buildAnalysisTrials(trial_reading, responses, exclusions$analysis_sample, derived_dir)
