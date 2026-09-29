@@ -1,0 +1,326 @@
+body
+{
+    background-color: #f2f4f5;
+}
+
+.main
+{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.article-xp, .article-xp0
+{
+    border-radius: 1em;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    box-shadow: 1px 1px grey;
+    flex-direction: column;
+    height: 10em;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin:auto;
+    margin-top: 4em;
+    margin-bottom: 4em;
+    border-radius: 1em;
+    font-size: 21px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.article-xp-index
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 10em;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    margin:auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    border-radius: 1em;
+    font-size: 21px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.header-xp
+{
+    height: 3em;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.article-quest
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    margin:auto;
+    margin-top: 2em;
+    border-radius: 1em;
+    font-size: 21px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.header-quest
+{
+    height: 1em;
+    width: 75%;
+    text-align: center;
+    justify-content: space-around;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.regardingclaim
+{
+    font-size: 0.7em;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 10%;
+}
+.claim
+{
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1em;
+    font-size: 20px;
+    font-weight: bold;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 30%;
+    padding-left: 1em;
+    padding-right: 1em;
+    /* background: #2f2f2f;
+    box-shadow: 1px 1px grey;
+    color: #fff; */
+}
+.argument
+{
+    width: 100%;
+    flex-grow: 10;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.arg-chkbox
+{
+    display: none;
+}
+:checked + label.article-xp
+{
+    background-color: Chartreuse;
+}
+.argument-quest-wrapper
+{
+    border-radius: 1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    box-shadow: 1px 1px grey;
+    font-size: 21px;
+}
+.arguments-container
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100%;
+}
+.arguments-line
+{
+    display: grid;
+    grid-template-columns: 40% 10% 50%;
+    margin-bottom: 1em;
+}
+hr
+{
+    width: 40em;
+}
+.empty
+{
+    height: 2em;
+}
+.blank
+{
+}
+input[type=range]
+{
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 1.5em; /* Specified height */
+    background: linear-gradient(.25turn, dimgrey, white);
+    border-radius: 10px;
+    outline: solid; /* Remove outline */
+    outline-width: 2px;
+    opacity: 0.75; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+input[type=range].agreement
+{
+    background: linear-gradient(.25turn, dimgrey, white, dimgrey);
+}
+input[type=range].emotions
+{
+    background: linear-gradient(.25turn, dimgrey, white, dimgrey);
+}
+/* Mouse-over effects */
+input[type=range]:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: #000000;
+  cursor: pointer;
+}
+
+.label-questions
+{
+    display: grid;
+    grid-template-columns: 32% 32% 32%;
+    grid-gap: 2%;
+}
+
+.disagree
+{
+    text-align: left;
+}
+
+.agree
+{
+    text-align: right;
+}
+.questions
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.div-input
+{
+    width: 100%;
+}
+.new-argument
+{
+    width: 100%;
+    margin-top: 0.2em;
+    display: grid;
+    grid-template-columns: 40% 20% 20%;
+    grid-gap: 10%;
+    align-items: center;
+    justify-content: center;
+}
+.new-argument-question
+{
+    text-align: left;
+}
+input[type=radio]
+{
+    height: 2em;
+    width: 2em;
+    accent-color: #2f2f2f;
+}
+.new-argument-yes
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.new-argument-no
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+input[type=text]
+{
+    font-size: large;
+}
+input[type=submit]
+{
+    font-size: xx-large;
+    margin-top: 1em;
+    margin-bottom: 3em;
+    padding: 0.8em;
+    border: none;
+    outline: none;
+    background: #2f2f2f;
+    color: #fff;
+    border-radius: 40px;
+    text-align: center;
+    box-shadow: 0 6px 20px -5px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.centering
+{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+.end-text
+{
+    font-size: xxx-large;
+}
+.instructions
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    width: 80%;
+}
+.instructions p
+{
+    text-align: center;
+}
+.instructions-XP
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    width: 80%;
+    height: 8em;
+}
+.instructions-XP p
+{
+    text-align: center;
+}
+#mainHidden
+{
+    visibility: hidden;
+}

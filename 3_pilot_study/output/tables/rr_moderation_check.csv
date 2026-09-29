@@ -1,0 +1,2 @@
+"model","rhs_augmented","BIC_invariant","BIC_augmented","delta_BIC_augmented_minus_invariant","verdict","singular","warnings"
+"M1","A + C + A:C",145775.031726716,145783.377408263,8.34568154707085,"invariance supported",TRUE,"boundary (singular) fit: see help('isSingular')"

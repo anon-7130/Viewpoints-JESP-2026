@@ -1,0 +1,4 @@
+"check","value","criterion","consequence_if_failed","passed"
+"cor(A, S) across trials",0.80063791087542,"<= 0.95","H5/H6 comparisons uninformative",TRUE
+"median within-participant SD of A - S",0.815215801188763,NA,NA,NA
+"median statements beyond the ideal point",44,">= 10","acrophily comparison underpowered",TRUE

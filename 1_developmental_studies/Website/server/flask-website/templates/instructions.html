@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <title>Instructions</title>
+</head>
+<body>
+
+    <section class="main" id="main">
+        {% if condition != 2 %}
+        <div class="instructions">
+            <p>Before you begin, choose a social media platform (such as Facebook, Twitter, or LinkedIn) where you are occasionally active. This means a social media where you occasionally share content or interact with other users outside of the private messaging system (at least once in the previous six months).</p>
+            <p>If you are not active on social media, then please do not participate in this experiment.</p>
+            <p>Once you have selected a social media platform, please keep it in mind throughout the study. It will be referred to as "your chosen social media platform" throughout the rest of the study.</p>
+            {% if condition == 0 %}
+            <p>Despite previous questions, you will not be asked to share anything or interact in any way with your chosen social media platform during the study. Just keep the one you have chosen in mind, because you will be asked a few questions about it later.</p>
+            {% endif %}
+            <p>In the first phase of the study, you will be given a list of statements covering a wide range of different topics.</p>
+            <p>Here is an example:</p>
+        </div>
+        <article class="article-xp">
+            <header class="header-quest">
+                <p class="claim">Example question: "Do aliens exist?"</p>
+            </header>
+            <div class="empty"></div>
+            <p class="argument">Example statement: "If life existed elsewhere in the universe, it would be known to humanity by now"</p>
+        </article>
+        <hr>
+        <div class="instructions">
+            {% if condition == 0 %}
+            <p>Please take the time to read through these statements and consider what you think about them.</p>
+            {% elif condition == 1 %}
+            <p>Please read through each statement and click on the one(s) you want to share about on your chosen social media platform. You must select <b>at least one</b> statement, but you can select as many as you like.</p>
+            {% endif %}
+            <p>During the survey, please remember to <b>only</b> use the scroll wheel on the mouse to scroll down the screen. Please do not attempt to scroll down using the side scroll bars or by pressing keys on the laptop.</p>
+            <p>When you have finished reading all the statements, click the "Finished reading" button located at the bottom of the page to continue.</p>
+            <p>You will then be asked to answer a questionnaire.</p>
+            {% if condition == 1 %}
+            <p>At the very end of the study, one of the statements you selected will be randomly picked for you to share about on your chosen social media platform.</p>
+            {% endif %}
+        </div>
+
+        <form action="/XP/" method="get">
+            <input hidden id="user" name="user" value="{{ user }}">
+            <input hidden id="condition" name="condition" value="{{ condition }}">
+            <input type="submit" value="Start study">
+        </form>
+        {% endif %}
+        {% if condition == 2 %}
+        <div class="instructions">
+            <p>Maximum number of participants reached, please contact experimenter.</p>
+        </div>
+        {% endif %}
+    </section>
+</body>
+</html>

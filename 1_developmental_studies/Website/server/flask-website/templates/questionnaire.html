@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="{{ url_for('static', filename='javascript/script_questionnaire.js') }}"></script>
+    <title>Questionnaire</title>
+</head>
+<body>
+    <section class="main" id="pressKey">
+        <div class="instructions">
+            <p>Please press the "S" key to continue the study</p>
+        </div>
+    </section>
+    <section class="main" id="mainHidden">
+        <div class="instructions">
+            <p>All previously displayed statements will now be presented again, this time arranged by topic.</p>
+            <p>Rank how much you agree with the each statement using the scale (from "strongly disagree" to "strongly agree"). Also, rate how much you think most people you connect with on your chosen social media platform agree with the statement (from "contacts strongly disagree” to “contacts strongly agree”).</p>
+            <p>Please provide an answer for all statements.</p>
+        </div>
+        <form action="/ending/" method="post">
+            {% for topic in arguments %}
+                <article class="article-quest">
+                    <header class="header-quest">
+                    </header>
+                    <div class="empty"></div>
+                    <div class="argument-quest-wrapper">
+                        <p class="claim">{{ topic }}</p>
+                    {% for argument in arguments[topic] %}
+                        <div class="arguments-line">
+                            <span class="arguments-container">{{ argument[0] }}</span>
+                            <span class="blank"> </span>
+                            <span class="questions">
+                                <div class="div-input">
+                                    <span class="label-questions">
+                                        <span class="disagree">Strongly disagree</span>
+                                        <span class="middle">Neutral</span>
+                                        <span class="agree">Strongly agree</span>
+                                    </span>
+                                    <span class="range-with-name">
+                                    <span><input type="range" min="0" max="100" step="any" class="agreement" name="{{ argument[1] }}-agreement" id="{{ argument[1] }}-agreement"></span></span>
+                                </div>
+                                <div class="div-input">
+                                    <span class="label-questions">
+                                        <span class="disagree">Contacts strongly disagree</span>
+                                        <span class="middle">Neutral</span>
+                                        <span class="agree">Contacts strongly disagree</span>
+                                    </span>
+                                    <input type="range" min="0" max="100" step="any" class="emotions" name="{{ argument[1] }}-agreement-contacts" id="{{ argument[1] }}-agreement-contacts">
+                                </div>
+                            </span>
+                        </div>
+                        <hr>
+                    {% endfor %}
+                    </div>
+                </article>
+            {% endfor %}
+            <input hidden id="user" name="user" value="{{ user }}">
+            <input hidden id="condition" name="condition" value="{{ condition }}">
+            <span class="centering"><input type="submit" value="Submit answers"></span>
+        </form>
+    </section>
+</body>
+</html>

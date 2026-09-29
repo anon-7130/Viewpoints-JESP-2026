@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <title>Ending</title>
+</head>
+<body>
+    <section class="main" id="main">
+
+        <p class="end-text">
+            Thank you very much for choosing to participate in this study!
+        </p>
+        {% if condition==1 %}
+        <div class="instructions">
+            <p>
+                The randomly selected statement that you can share on your chosen social media is:
+            </p>
+            <article class="article-xp">
+                <header class="header-quest">
+                    <p class="claim">{{ argument[0][0] }}</p>
+                </header>
+                <p class="argument">{{ argument[0][1] }}</p>
+            </article>
+            <p>
+                If you still want to share this statement, feel free to do so after the study is over.
+            </p>
+            <p>
+                It is not required to share anything and you can just ignore this instruction if you do not want to share about the statement on your chosen social media platform. The results of the study will not be affected in any way.
+            </p>
+        </div>
+        {% endif %}
+        <p class="end-text">
+            You can now call the researcher using the bell.
+        </p>
+    </section>
+</body>
+</html>

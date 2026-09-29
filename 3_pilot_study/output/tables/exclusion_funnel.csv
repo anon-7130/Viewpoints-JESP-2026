@@ -1,0 +1,6 @@
+"step","n_failing_gate","n_removed","n_remaining","n_following","n_sharing"
+"completers",NA,NA,142,78,64
+"gate 1: key-mashing (>15% of trials < 1000 ms)",13,13,129,72,57
+"gate 2: manipulation check (not engaging with content)",3,3,126,69,57
+"gate 3: gaze rate (>30% below median)",25,19,107,57,50
+"gate 4: reading pattern on < 50% of trials",20,8,99,54,45

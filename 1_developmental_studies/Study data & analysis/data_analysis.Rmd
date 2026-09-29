@@ -1,0 +1,412 @@
+---
+title: "Data analysis"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document: 
+    toc: yes
+    latex_engine: lualatex
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# NB : if you never output pdf files with RMarkdown, it might be necessary to
+# install the tinytex library and run tinytex::install_tinytex()
+
+library(tidyverse)
+library(lme4)
+library(afex)
+library(gridExtra)
+```
+
+## Fit algorithm definition
+```{r}
+fit_algo <- function(new_call,
+                     newData = NULL,
+                     type = "lmer")
+{
+  if (type != "lmer" && type != "glmer")
+  {
+    stop("type must be lmer or glmer")
+  }
+  new_call["start"] <- NULL
+  new_call["control"] <-
+    parse(text = paste0(
+      type,
+      'Control(optimizer ="bobyqa", optCtrl = list(maxfun=1000000))'
+    ))
+  error_msg <- tryCatch({
+    rval <- eval(new_call)
+    if (length(rval@optinfo$conv$lme4) != 0)
+    {
+      "convergence"
+    }
+    else
+    {
+      "ok"
+    }
+  }, error = function(e) {
+    "error"
+  })
+  count <- 0
+  while (error_msg != "ok" && count < 4)
+  {
+    if (error_msg == "convergence")
+    {
+      new_call["start"] <- parse(text = "list(fixef = fixef(rval))")
+    }
+    count <- count + 1
+    error_msg <- tryCatch({
+      rval <- eval(new_call)
+      if (length(rval@optinfo$conv$lme4) != 0)
+      {
+        "convergence"
+      }
+      else
+      {
+        "ok"
+      }
+    }, error = function(e) {
+      "error"
+    })
+  }
+  new_call["start"] <- NULL
+  new_call["control"] <-
+    parse(text = paste0(
+      type,
+      'Control(optimizer ="Nelder_Mead", optCtrl = list(maxfun=1000000))'
+    ))
+  count <- 0
+  while (error_msg != "ok" && count < 5)
+  {
+    count <- count + 1
+    error_msg <- tryCatch({
+      rval <- eval(new_call)
+      if (length(rval@optinfo$conv$lme4) != 0)
+      {
+        "convergence"
+      }
+      else
+      {
+        "ok"
+      }
+    }, error = function(e) {
+      "error"
+    })
+    if (error_msg == "convergence")
+    {
+      new_call["start"] <- parse(text = "list(fixef = fixef(rval))")
+    }
+    
+  }
+  new_call["start"] <- NULL
+  new_call["control"] <- NULL
+  count <- 0
+  while (error_msg != "ok" && count < 5)
+  {
+    count <- count + 1
+    error_msg <- tryCatch({
+      rval <- eval(new_call)
+      if (length(rval@optinfo$conv$lme4) != 0)
+      {
+        "convergence"
+      }
+      else
+      {
+        "ok"
+      }
+    }, error = function(e) {
+      "error"
+    })
+    if (error_msg == "convergence")
+    {
+      new_call["start"] <- parse(text = "list(fixef = fixef(rval))")
+    }
+    
+  }
+  if (!exists("rval"))
+  {
+    eval(new_call)
+  }
+  return(rval)
+}
+
+```
+
+## Dataset loading
+
+```{r}
+datasets <-
+  list.files(file.path("final_data"),
+             pattern = "*.csv",
+             full.names = TRUE)
+datasets <- lapply(datasets, read_csv, show_col_types = FALSE)
+
+d <- datasets[[1]]
+for (i in seq(from = 2, to = length(datasets)))
+{
+  d <- rbind(d, datasets[[i]])
+}
+```
+
+## Dataset preparation
+
+```{r}
+d <- d %>% mutate(Subject = rep(seq_len(length(datasets)), each = 100))
+```
+
+Then we remove total dwell times <=1500ms, scale the Agreement feature and take its square.
+We do the same with Agreement.Contacts
+
+```{r}
+d_final <- d %>% filter(Dwell.Time > 1500) %>%
+  mutate(
+    Agreement.Scaled = (Agreement - mean(Agreement)) / sd(Agreement),
+    Squared.Agreement.Scaled = Agreement.Scaled ^ 2,
+    Agreement.Contacts.Scaled = (Agreement.Contacts - mean(Agreement.Contacts)) /
+      sd(Agreement.Contacts),
+    Squared.Agreement.Contacts.Scaled = Agreement.Contacts.Scaled ^
+      2,
+    Index = as.factor(Index),
+    Subject = as.factor(Subject)
+  )
+d_final$Condition <- as.factor(d_final$Condition_Share)
+levels(d_final$Condition) <- c("Reading", "Sharing")
+
+```
+
+## Variables plot (violin & boxplot + density)
+
+```{r}
+violin_fixation <-
+  ggplot(d_final, aes(x = "Dwell time", y = Dwell.Time)) +
+  ylab("Dwell Time (log)") + theme_minimal() +
+  theme(legend.position = "none") +
+  geom_violin(width = 1.2) + geom_boxplot(width = 0.1, alpha = 0.2)
+
+violin_agreement <-
+  ggplot(d_final, aes(x = "Agreement", y = Agreement.Scaled)) +
+  ylab("Agreement (scaled)") + theme_minimal() +
+  theme(legend.position = "none") +
+  geom_violin(width = 1.2) + geom_boxplot(width = 0.1, alpha = 0.2)
+
+violin_agreement_contacts <-
+  ggplot(d_final,
+         aes(x = "Agreement (contacts)", y = Agreement.Contacts.Scaled)) +
+  ylab("Agreement (contacts; scaled)") + theme_minimal() +
+  theme(legend.position = "none") +
+  geom_violin(width = 1.2) + geom_boxplot(width = 0.1, alpha = 0.2)
+
+density_fixation <-
+  ggplot(d_final, aes(x = Dwell.Time)) + geom_density()
+
+density_agreement <-
+  ggplot(d_final, aes(x = Agreement.Scaled)) + geom_density()
+
+density_agreement_contacts <-
+  ggplot(d_final, aes(x = Agreement.Contacts.Scaled)) + geom_density()
+
+grid.arrange(
+  violin_fixation,
+  violin_agreement,
+  violin_agreement_contacts,
+  density_fixation,
+  density_agreement,
+  density_agreement_contacts,
+  nrow = 2
+)
+```
+
+## Statistical models
+
+
+### Agreement
+
+```{r, warning=FALSE}
+personal_call <-
+  parse(text = 'lmer(Dwell.Time ~ Agreement.Scaled + Squared.Agreement.Scaled + Condition_Share + Agreement.Scaled*Condition_Share + Squared.Agreement.Scaled*Condition_Share +
+                    (1 | Index) +
+                    (1 | Subject),
+                  data=d_final)')[[1]]
+
+fit_personal <- fit_algo(personal_call)
+
+summary(fit_personal)
+```
+
+#### Fixed effects plots
+
+```{r}
+d_final$personal_prediction <- predict(fit_personal, re.form = NA)
+
+ggplot(d_final) +
+  geom_line(
+    aes(
+      x = Agreement.Scaled,
+      personal_prediction,
+      color = Condition,
+      group = Condition
+    ),
+    linewidth = 1.5
+  ) +
+  theme_minimal_grid(12) + labs(y = "TDT", x = "Agreement")
+
+ggsave(p2, filename = "study_plot1.png", type = "cairo")
+
+```
+
+### Agreement (contacts)
+
+```{r, warning=FALSE}
+contacts_call <-
+  parse(text = 'lmer(Dwell.Time ~ Agreement.Contacts.Scaled + Squared.Agreement.Contacts.Scaled + Condition_Share + Agreement.Contacts.Scaled*Condition_Share + Squared.Agreement.Contacts.Scaled*Condition_Share +
+                    (1 | Index) +
+                    (1 | Subject),
+                  data=d_final)')[[1]]
+
+fit_contacts <- fit_algo(contacts_call)
+
+summary(fit_contacts)
+```
+
+#### Fixed effects plots
+
+```{r}
+d_final$contacts_prediction <- predict(fit_contacts, re.form = NA)
+
+ggplot(d_final) +
+  geom_line(
+    aes(
+      x = Agreement.Contacts.Scaled,
+      contacts_prediction,
+      color = Condition,
+      group = Condition
+    ),
+    linewidth = 1.5
+  ) +
+  theme_minimal_grid(12) + labs(y = "TDT", x = "Agreement")
+
+ggsave(p2, filename = "study_plot2.png", type = "cairo")
+
+```
+
+```{r}
+vertex_reading_personal <-
+  (-summary(fit_personal)[["coefficients"]][2]) / (2 * summary(fit_personal)[["coefficients"]][3])
+vertex_sharing_personal <-
+  -(summary(fit_personal)[["coefficients"]][2] + summary(fit_personal)[["coefficients"]][5]) /
+  (2 * (summary(fit_personal)[["coefficients"]][3] + summary(fit_personal)[["coefficients"]][6]))
+
+pred_reading_personal <-
+  predict(
+    fit_personal,
+    re.form = NA,
+    newdata = tibble(
+      Condition_Share = c(0, 0, 0),
+      Agreement.Scaled = c(
+        min(d_final$Agreement.Scaled),
+        vertex_reading_personal,
+        max(d_final$Agreement.Scaled)
+      ),
+      Squared.Agreement.Scaled = Agreement.Scaled ** 2
+    )
+  )
+
+pred_sharing_personal <-
+  predict(
+    fit_personal,
+    re.form = NA,
+    newdata = tibble(
+      Condition_Share = c(1, 1, 1),
+      Agreement.Scaled = c(
+        min(d_final$Agreement.Scaled),
+        vertex_sharing_personal,
+        max(d_final$Agreement.Scaled)
+      ),
+      Squared.Agreement.Scaled = Agreement.Scaled ** 2
+    )
+  )
+
+vertex_reading_contacts <-
+  (-summary(fit_contacts)[["coefficients"]][2]) / (2 * summary(fit_contacts)[["coefficients"]][3])
+vertex_sharing_contacts <-
+  -(summary(fit_contacts)[["coefficients"]][2] + summary(fit_contacts)[["coefficients"]][5]) /
+  (2 * (summary(fit_contacts)[["coefficients"]][3] + summary(fit_contacts)[["coefficients"]][6]))
+
+pred_reading_contacts <-
+  predict(
+    fit_contacts,
+    re.form = NA,
+    newdata = tibble(
+      Condition_Share = c(0, 0, 0),
+      Agreement.Contacts.Scaled = c(
+        min(d_final$Agreement.Contacts.Scaled),
+        vertex_reading_contacts,
+        max(d_final$Agreement.Contacts.Scaled)
+      ),
+      Squared.Agreement.Contacts.Scaled = Agreement.Contacts.Scaled ** 2
+    )
+  )
+
+pred_sharing_contacts <-
+  predict(
+    fit_contacts,
+    re.form = NA,
+    newdata = tibble(
+      Condition_Share = c(1, 1, 1),
+      Agreement.Contacts.Scaled = c(
+        min(d_final$Agreement.Contacts.Scaled),
+        vertex_sharing_contacts,
+        max(d_final$Agreement.Contacts.Scaled)
+      ),
+      Squared.Agreement.Contacts.Scaled = Agreement.Contacts.Scaled ** 2
+    )
+  )
+
+table <-
+  round(matrix(
+    c(
+      vertex_reading_personal,
+      vertex_sharing_personal,
+      vertex_reading_contacts,
+      vertex_sharing_contacts,
+      min(d_final$Agreement.Scaled),
+      min(d_final$Agreement.Scaled),
+      min(d_final$Agreement.Contacts.Scaled),
+      min(d_final$Agreement.Contacts.Scaled),
+      max(d_final$Agreement.Scaled),
+      max(d_final$Agreement.Scaled),
+      max(d_final$Agreement.Contacts.Scaled),
+      max(d_final$Agreement.Contacts.Scaled),
+      pred_reading_personal[2] - pred_reading_personal[1],
+      pred_sharing_personal[2] - pred_sharing_personal[1],
+      pred_reading_contacts[2] - pred_reading_contacts[1],
+      pred_sharing_contacts[2] - pred_sharing_contacts[1],
+      pred_reading_personal[2] - pred_reading_personal[3],
+      pred_sharing_personal[2] - pred_sharing_personal[3],
+      pred_reading_contacts[2] - pred_reading_contacts[3],
+      pred_sharing_contacts[2] - pred_sharing_contacts[3]
+    ),
+    ncol = 4,
+    byrow = TRUE
+  ), 3)
+
+rownames(table) <-
+  c(
+    'Vertex position',
+    'min agreement',
+    'max agreement',
+    'diff min vs. vertex',
+    'diff max vs. vertex'
+  )
+colnames(table) <-
+  c(
+    "Personal agreement, reading",
+    "Personal agreement, sharing",
+    "Contacts agreement, reading",
+    "Contacts agreement, sharing"
+  )
+table <- as.table(table)
+table
+
+```

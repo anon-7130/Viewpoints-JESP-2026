@@ -1,0 +1,9 @@
+.DS_Store
+__pycache__/
+Registered-Report-Extreme-Viewpoints-Attention-main.zip
+
+# Committed as .zip because of GitHub's 100 MB file limit; unzip in place before running
+3_pilot_study/data/raw/*_eye_tracking.csv
+
+# Cache rebuilt by analysis.R
+3_pilot_study/data/derived/
