@@ -5,7 +5,7 @@ import json
 import openpyxl
 
 ATTENTION_CHECKS = {'AC-FL': 1, 'AC-C': 3, 'AC-FR': 5} # The title states the required answer
-LITERACY_ANSWERS = {'veto': '2/3', 'members': 'The Republican Party', 'conservative': 'The Republican Party'}
+LITERACY_ANSWERS = {'law': 'The Supreme Court', 'veto': '2/3', 'members': 'The Republican Party', 'conservative': 'The Republican Party'}
 VP_CORRECT_RE = re.compile(r'\bvice[\s.\-]*pres|\bv\.?\s*p\.?\b', re.IGNORECASE)
 ITEM_TITLE_RE = re.compile(r'^(?P<family>[A-Z]+)(?:-(?P<number>\d+))?-(?P<variant>[A-Z]+)$')
 MAX_LITERACY_FAILS = 1 # Any attention check failure excludes, but one literacy slip is ordinary
