@@ -1,0 +1,59 @@
+Participant code,Age,Sex,Ethnicity simplified,Country of birth,Country of residence,Nationality,Language,Student status,Employment status
+V011,25,Male,White,United States,United States,United States,English,No,Full-Time
+V017,31,Female,Prefer not to say,United States,United States,United States,English,No,Part-Time
+V018,34,Female,White,United States,United States,United States,English,No,Full-Time
+V020,67,Female,White,United States,United States,United States,English,No,DATA_EXPIRED
+V029,67,Male,White,United States,United States,United States,English,No,"Not in paid work (e.g. homemaker', 'retired or disabled)"
+V030,69,Female,White,United States,United States,United States,English,No,"Not in paid work (e.g. homemaker', 'retired or disabled)"
+V039,51,Male,White,United States,United States,United States,English,No,Full-Time
+V049,61,Male,White,United States,United States,United States,English,No,"Not in paid work (e.g. homemaker', 'retired or disabled)"
+V053,46,Male,White,United States,United States,United States,English,DATA_EXPIRED,DATA_EXPIRED
+V058,19,Male,Asian,United States,United States,United States,English,Yes,Other
+V060,66,Male,White,United States,United States,United States,English,No,Full-Time
+V069,57,Male,Mixed,United States,United States,United States,English,No,Full-Time
+V078,28,Male,Other,United States,United States,United States,English,No,Full-Time
+V083,29,Male,White,United States,United States,United States,English,Yes,Full-Time
+V084,48,Male,White,United States,United States,United States,English,No,Full-Time
+V088,53,Male,White,United States,United States,United States,English,No,Full-Time
+V090,47,Female,White,United States,United States,United States,English,No,Full-Time
+V095,61,Male,Black,United States,United States,United States,English,Yes,Full-Time
+V096,39,Male,White,United States,United States,United States,English,No,Full-Time
+V104,39,Female,White,United States,United States,United States,English,Yes,Full-Time
+V106,26,Male,White,United States,United States,United States,English,Yes,Part-Time
+V107,59,Male,Other,United States,United States,United States,English,No,Full-Time
+V131,37,Male,White,United States,United States,United States,English,No,Full-Time
+V135,41,Female,White,United States,United States,United States,English,No,"Not in paid work (e.g. homemaker', 'retired or disabled)"
+V145,53,Female,White,United States,United States,United States,English,No,Full-Time
+V147,25,Male,Mixed,United States,United States,United States,English,No,Full-Time
+V150,46,Female,White,United States,United States,United States,English,No,Full-Time
+V159,50,Female,Mixed,United States,United States,United States,English,No,"Not in paid work (e.g. homemaker', 'retired or disabled)"
+V160,55,Male,Black,United States,United States,United States,English,DATA_EXPIRED,DATA_EXPIRED
+V167,28,Male,White,United States,United States,United States,English,No,Full-Time
+V168,52,Female,White,United States,United States,United States,English,No,Full-Time
+V169,27,Female,Mixed,United States,United States,United States,English,No,Full-Time
+V170,36,Female,White,United States,United States,United States,English,No,Unemployed (and job seeking)
+V176,20,Female,White,United States,United States,United States,English,Yes,Part-Time
+V177,24,Female,White,United States,United States,United States,English,No,Full-Time
+V182,53,Female,White,United States,United States,United States,English,No,Part-Time
+V187,44,Male,Black,United States,United States,United States,English,Yes,DATA_EXPIRED
+V191,43,Female,Black,United States,United States,United States,English,No,Part-Time
+V196,76,Male,White,United States,United States,United States,English,No,"Not in paid work (e.g. homemaker', 'retired or disabled)"
+V206,24,Female,White,United States,United States,United States,English,No,Unemployed (and job seeking)
+V214,40,Female,White,United States,United States,United States,English,No,Full-Time
+V215,38,Male,White,United States,United States,United States,English,No,Full-Time
+V220,46,Male,White,United States,United States,United States,English,No,Full-Time
+V222,59,Female,White,United States,United States,United States,English,No,Part-Time
+V231,53,Female,White,United States,United States,United States,English,No,"Not in paid work (e.g. homemaker', 'retired or disabled)"
+V232,44,Female,Mixed,United States,United States,United States,English,No,Full-Time
+V234,43,Female,White,United States,United States,United States,English,No,Full-Time
+V236,49,Male,White,United States,United States,United States,English,No,Full-Time
+V241,35,Female,White,United States,United States,United States,English,No,Full-Time
+V244,39,Male,White,United States,United States,United States,English,No,"Not in paid work (e.g. homemaker', 'retired or disabled)"
+V247,50,Male,White,United States,United States,United States,English,No,Full-Time
+V253,30,Male,Black,Kenya,United States,United States,Swahili,No,Full-Time
+V262,37,Male,Asian,United States,United States,United States,English,No,Full-Time
+V274,48,Female,Mixed,United States,United States,United States,English,No,Full-Time
+V277,30,Female,Black,United States,United States,United States,English,No,Full-Time
+V287,39,Female,White,United States,United States,United States,English,No,Part-Time
+V288,42,Female,White,United States,United States,United States,English,No,Full-Time
+V293,47,Male,White,United States,United States,United States,English,DATA_EXPIRED,Full-Time

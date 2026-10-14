@@ -1,0 +1,6 @@
+dataset_commit,sample_seed,specification,primary_benchmark,population,n,mean_words,q1_words,median_words,q3_words,text_field,language_filter,reply_filter,tokenisation
+829172118f35d901de008a94cec89d3eea04410f,12345,all_posts_raw,False,All sampled posts,2200000,22.669299,10,19,35,rawContent,none,none,Python str.split; URLs and mentions retained
+829172118f35d901de008a94cec89d3eea04410f,12345,english_all_raw,False,English-language sampled posts,1917125,24.408848,12,21,36,rawContent,lang == en,none,Python str.split; URLs and mentions retained
+829172118f35d901de008a94cec89d3eea04410f,12345,english_all_content,False,English-language sampled posts,1917125,22.846585,10,19,35,rawContent,lang == en,none,"Python str.split after removing tokens beginning with @, http://, https://, or www."
+829172118f35d901de008a94cec89d3eea04410f,12345,english_nonreply_raw,False,English-language non-reply sampled posts,528628,24.189271,13,21,35,rawContent,lang == en,both reply fields empty,Python str.split; URLs and mentions retained
+829172118f35d901de008a94cec89d3eea04410f,12345,english_nonreply_content,True,English-language non-reply sampled posts,528628,23.355447,12,20,34,rawContent,lang == en,both reply fields empty,"Python str.split after removing tokens beginning with @, http://, https://, or www."

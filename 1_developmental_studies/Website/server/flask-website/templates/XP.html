@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <script src="{{ url_for('static', filename='javascript/script_XP.js') }}"></script>
+    <title>Study</title>
+</head>
+<body>
+    <section class="main" id="main">
+        <div class="instructions-XP">
+            {% if condition == 0 %}
+            <p>Please take the time to read through these statements and consider what you think about them.</p>
+            {% endif %}
+            {% if condition == 1 %}
+            <p>Please read through each statement and click on the one(s) you want to share about on your chosen social media platform. You must select <b>at least one</b> statement, but you can select as many as you like. Selected statements will become green.</p>
+            {% endif %}
+        </div>
+        <form {% if condition == 1 %} onsubmit="return handleData()" {% endif %} action="/questionnaire/" method="post">
+        <hr>
+        {% for argument in arguments %}
+            <input class="arg-chkbox" name="argument-checkbox" id="argument-checkbox-{{loop.index0}}" type="checkbox" value={{loop.index0}}>
+            {% if condition == 0 %}
+            <label for="argument-checkbox-{{loop.index0}}" class="article-xp0">
+            {% elif condition == 1 %}
+            <label for="argument-checkbox-{{loop.index0}}" class="article-xp">
+            {% endif %}
+                <header class="header-quest">
+                    <!-- <p class="regardingclaim">Regarding the claim:</p> -->
+                    <p class="claim">{{ argument[0] }}</p>
+                </header>
+                <!-- <div class="empty"></div> -->
+                <p class="argument">{{ argument[1] }}</p>
+            </label>
+        <hr>
+        {% endfor %}
+            <span class="centering"><div style="visibility:hidden; color:red; font-size:3em;" id="chk_option_error">Please select at least one statement to share</div></span>
+            <input hidden id="user" name="user" value="{{ user }}">
+            <input hidden id="condition" name="condition" value="{{ condition }}"><br>
+            <span class="centering"><input type="submit" value="Finished reading"></span>
+
+        </form>
+    </section>
+</body>
+</html>

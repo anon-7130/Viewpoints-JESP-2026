@@ -1,0 +1,101 @@
+"Order","Index","Topic","Argument","Words","Condition_Share","Share","Agreement","Agreement.Contacts","New","Dwell.Time"
+1,289,"Bør vi tilpasse os klimaforandringer i stedet for at forhindre dem?","Tilpasning er en kortvarig løsning, mens afværgelse af klimaforandringer er en langvarig løsning",13,1,0,62.89833,65.18986,0,5190.31499999999
+2,213,"Er det etisk forkert at spise kød?","Vegetariske kostvaner bidrager direkte og indirekte til bedre sundhedsresultater for alle mennesker",13,1,0,62.89833,53.12918,0,9449.62599999998
+3,188,"Bør religion være involveret i politik?","Det er nødvendigt at involvere religion i politik for at sikre, at love og politikker er etiske",15,1,0,39.98304,40.34486,0,7100.326
+4,152,"Er moderne teknologi er en ulempe for samfundet?","Moderne teknologi udvikler sig hurtigere end vores evne til at forstå, formulere og godkende effektive politikker, der kan beskytte os mod teknologisk skade",21,1,0,60.4862,59.64195,0,5500.998
+5,158,"Bør nogle føle sig forpligtet til at ændre sin livsstil for at bekæmpe global opvarmning?","Politikere og politiske partier bør være ansvarlige for at vedtage de love og reguleringer, der er nødvendige for at foretage ændringer i en stor skala",19,1,0,69.4111,42.63639,0,12110.992
+6,246,"Bør alle stoffer blive legaliseret?","Hvis stoffer blev legaliseret, ville narkohandlen være mindre i stand til at fremme alvorlig kriminalitet",15,1,0,53.85282,54.33525,0,2500.664
+7,217,"Er det etisk forkert at spise kød?","At indtage kød er en vigtig del af mange kulturer og religioner",11,1,0,56.14435,75.07962,0,2350.997
+8,159,"Bør nogle føle sig forpligtet til at ændre sin livsstil for at bekæmpe global opvarmning?","Ændringer i individuelle livsstile gør ingen forskel",9,1,0,33.83209,56.50617,0,5775.995
+9,153,"Er moderne teknologi er en ulempe for samfundet?","For at undgå en katastrofe bør teknologisk udvkling følge med den hurtige forandring i vores samfund",17,1,0,69.04928,64.1044,0,4442.998
+10,130,"Hjælper eller skader sociale medier menneskelige relationer?","Sociale medier har gjort det lettere at kommunikere og forbedret kvaliteten af kommunikationen",13,1,0,70.13474,71.94384,0,13689.316
+11,132,"Hjælper eller skader sociale medier menneskelige relationer?","Sociale medier giver brugerne mulighed for at oprette forbindelse til flere mennesker",9,1,0,89.31122,75.07962,0,10473.328
+12,194,"Bør religion være involveret i politik?","Politik og religion bør lægges til side. Disse tre aspekter af livet bør IKKE følges ad: religion-stat-hær",15,1,0,100,100,0,1348.327
+13,161,"Bør nogle føle sig forpligtet til at ændre sin livsstil for at bekæmpe global opvarmning?","Mennesker i nutidens samfund bør ændre deres livsstil, fordi livskvaliteten for kommende generationer er lige så vigtig.",19,1,0,95.70338,77.73297,0,3017.665
+14,290,"Bør vi tilpasse os klimaforandringer i stedet for at forhindre dem?","Hvis vi beslutter os for at tilpasse os klimaforandringerne, vil vi miste evnen til at afværge dem",17,1,0,30.21389,31.05814,1,7709.995
+15,173,"Bør abort betragtes som mord?","Da hensigten med abort er døden, bør sådanne procedurer betragtes som mord",11,1,0,3.68039,3.31857,0,2891.996
+16,222,"Bør brugen af plastik undgås?","Plastik bliver eksporteret, hvorfor et nedsat forbrug af plastik vil reducere CO2-emmisionen, der stammer fra transport",13,1,0,87.74333,87.26091,0,12306.662
+17,221,"Bør brugen af plastik undgås?","Jo mindre plastik vi bruger, desto mindre plastik skal vi producere",12,1,0,90.15547,87.86394,0,2732.329
+18,107,"Er det etisk forkert at se pornografi?","At se pornografi bidrager til overtrædelser af menneskerettighederne, herunder kønslig ulighed",10,1,0,43.72185,44.44549,0,3683.997
+19,230,"Vil menneskeskabt klimaforandring føre til menneskehedens udryddelse?","Dyrearter er allerede begyndt at uddø. Udryddelsen af menneskeheden er sandsynligvis det næste",14,1,0,51.32008,51.44069,0,21304.978
+20,228,"Bør brugen af plastik undgås?","Plastik bliver sandsynligvis erstattet af noget, der er mindre miljøvenligt. Så det ville ikke give mening at undgå brugen af plastik",16,1,0,6.93678,7.78102,0,8158.991
+21,26,"Er mennesker fundamentalt anderledes end andre dyr?","Alle dyr er grundlæggende forskellige fra hinanden, og der er intet unikt ved mennesker, der adskiller dem fra dyr",19,1,0,45.89277,36.60605,0,6455.993
+22,21,"Er mennesker fundamentalt anderledes end andre dyr?","Mennesker er intellektuelt overlegne overfor andre væsener på Jorden",9,1,0,18.99746,47.21945,0,3405.996
+23,50,"Skabte et guddommeligt væsen universet?","Observationer af Guds skabende kraft er aftaget, efterhånden som menneskeheden har udviklet sig",11,1,0,51.07887,48.90794,0,8301.97099999999
+24,121,"Er videnskab lig religion?","Både videnskab og religion kræver troen på noget, som du personligt ikke forstår for at fungere",16,1,0,82.07481,81.8336,0,3850.656
+25,143,"Bør et udvælgelseslotteri være en grundlæggende del af demokratiske politiske systemer?","At blive udpeget til en magtposition ved lotteri ville efterlade mange mennesker overvældet og uforberedte",16,1,0,90.15547,90.51729,0,4743.994
+26,220,"Bør brugen af plastik undgås?","Jo mindre plastik vi bruger, desto mindre plastikforurening vil der være",12,1,0,82.31603,82.07481,0,4218.995
+27,112,"Er stråling fra mobiltelefoner og Wi-fi skadeligt?","Mobiltelefonstråling absorberes mere af børns hjerner end af voksnes hjerner",13,1,0,50,50,0,2657.33
+28,23,"Er mennesker fundamentalt anderledes end andre dyr?","Mennesker har en følelse af selvbevidsthed og individuel identitet",9,1,0,87.98455,87.38151,0,2842.665
+29,124,"Er videnskab lig religion?","I modsætning til religion er videnskab baseret på beviser og eksperimentering, hvilket er en mere pålidelig metode til at opnå sandheden",18,1,0,81.59239,79.42146,0,4806.997
+30,288,"Bør vi tilpasse os klimaforandringer i stedet for at forhindre dem?","Menneskeheden har en lang historie med succesfuldt at tilpasse sig til klimaforandringer",11,1,0,40.70668,40.34486,0,3982.665
+31,180,"Bør dyreforsøg forbydes?","Dyreforsøg er en effektiv metode til at teste produkter",9,1,0,34.55573,34.07331,0,4399.326
+32,156,"Er moderne teknologi er en ulempe for samfundet?","Mange samfund ville ikke være mulige uden moderne teknologi - især store urbaniserede samfund",14,1,0,70.49656,69.53171,0,7814.995
+33,193,"Bør religion være involveret i politik?","At involvere religion i politik er i modstrid med principperne for et sekulært demokratisk samfund",14,1,0,73.27052,71.58202,0,3933.329
+34,167,"Liv vs. valg: Bør abort være lovligt?","Hvis folk har ret til at vælge, kan de træffe forudindtaget valg med hensyn til, hvilke fostre der skal aborteres",17,1,0,56.02374,56.50617,0,7617.661
+35,113,"Er stråling fra mobiltelefoner og Wi-fi skadeligt?","Mobiltelefonstråling øger gennemtrængeligheden af blod-hjerne-barrieren",10,1,0,50,50,0,2516.995
+36,54,"Hjælper eller skader elektroniske apparater børns udvikling?","Elektroniske enheder kan gavne forældre ved at tilbyde dem større kontrol over deres børns udvikling",13,1,0,37.08848,37.5709,1,2483.664
+37,59,"Hjælper eller skader elektroniske apparater børns udvikling?","Brugen af elektroniske enheder i skolen kan have en negativ indvirkning på børns karakterer",9,1,0,37.5709,37.81212,0,1775.331
+38,281,"Bør der ikke være nogen begrænsning for ytringsfriheden?","Én persons frihed slutter, hvor en andens begynder: stødende og truende tale bør være ulovlig",13,1,0,51.07887,51.92311,0,6043.663
+39,47,"Skabte et guddommeligt væsen universet?","Kompleksiteten på mange af universets fænomener og interaktioner antyder tilstedeværelsen af en guddommelig skaber",14,1,0,50,58.55649,0,2723.998
+40,242,"Vil menneskeskabt klimaforandring føre til menneskehedens udryddelse?","Menneskeskabte kulstofemissioner vil sandsynligvis beskytte mennesker mod en anden istid",12,1,0,45.04853,45.65156,0,4100.659
+41,62,"Hjælper eller skader elektroniske apparater børns udvikling?","Kedsomhed giver anledning til kreativitet, men med en smartphone keder børn sig aldrig og lærer ikke at være kreative",17,1,0,72.54688,85.69302,0,13632.659
+42,181,"Bør atomkraft erstatte fossile brændstoffer?","Kerneenergi rummer langt større potentiale end fossile brændsler til at udvikle sig gennem teknologiske gennembrud og øget effektivitet",17,1,0,83.40149,81.8336,0,6497.655
+43,162,"Bør nogle føle sig forpligtet til at ændre sin livsstil for at bekæmpe global opvarmning?","Mennesker, der lever i privilegerede positioner, har et moralsk ansvar for at ændre deres livsstil",13,1,0,97.51248,84.24574,0,2190.998
+44,245,"Bør alle stoffer blive legaliseret?","Det har skadet samfund i hele verden at håndhæve kriminialisering af stoffer og bør stoppes",17,1,0,50.23462,50.59644,0,3967.331
+45,115,"Er stråling fra mobiltelefoner og Wi-fi skadeligt?","Effekterne fra strålinger fra mobiltelefoner og Wi-Fi er minimale",11,1,0,81.23057,76.88872,0,1591.665
+46,196,"Bør sexarbejde være lovligt?","Det er umuligt at udrydde sexarbejde som profession. Derfor ville det være bedre at legalisere det",18,1,0,77.61236,74.7178,0,1433.332
+47,37,"Er Darwins evolutionsteori filosofi eller videnskab?","Darwins teori har logiske fejl og kan derfor næppe betragtes som videnskab",14,1,0,31.17874,30.93753,0,1883.997
+48,31,"Er Darwins evolutionsteori filosofi eller videnskab?","Der er aldrig blevet dokumenteret et enkelt eksempel på evolution",9,1,0,26.71629,31.29935,0,1781.998
+49,247,"Bør alle stoffer blive legaliseret?","At tage stoffer kan være en vigtig og positiv oplevelse for enkeltpersoner og fællesskaber",13,1,0,49.63158,49.51098,0,1391.666
+50,276,"Bør der ikke være nogen begrænsning for ytringsfriheden?","Isoleret tale kan ikke påføre fysisk skade",9,1,0,68.68746,69.04928,0,1951.332
+51,195,"Bør sexarbejde være lovligt?","Regeringen har ikke ret til at forbyde en interaktion mellem samtykkende voksne",12,1,0,85.3312,84.48695,0,1267.332
+52,29,"Er mennesker fundamentalt anderledes end andre dyr?","Genetik beviser, at mennesker grundlæggende ligner andre arter",10,1,0,83.76331,83.03967,0,2076.665
+53,190,"Bør religion være involveret i politik?","Næsten alle love er baseret på moralske overbevisninger, derfor er det passende, at religiøse personer deltager i politik",20,1,0,45.41035,46.01338,0,616.999
+54,249,"Bør alle stoffer blive legaliseret?","Stoffer bør forblive forbudt, fordi de er sundhedsskadelige for de personer, der bruger dem",16,1,0,50.35522,53.00857,0,2784.663
+55,286,"Bør vi tilpasse os klimaforandringer i stedet for at forhindre dem?","At tilpasse sig klimaforandringerne ville være hurtigere end at afværge dem",10,1,0,39.01819,37.81212,0,2386.661
+56,199,"Bør salget af genetisk modificeret mad forbydes?","Genetisk modificeret mad udgør en trussel mod sundheden for dem, der indtager det.",11,1,0,57.71224,57.59163,0,3521.329
+57,123,"Er videnskab lig religion?","Videnskab er yderst dynamisk og konstant i udvikling; religioner er normalt statiske og bevarende",13,1,0,76.28569,75.44144,0,2343.663
+58,280,"Bør der ikke være nogen begrænsning for ytringsfriheden?","Ubegrænset ytringsfrihed kan bruges til at sprede hadefulde og/eller skadelige ideologier",13,1,0,86.29605,86.53727,0,6289.996
+59,151,"Er moderne teknologi er en ulempe for samfundet?","Teknolgi forhindrer os i at nyde de nuværende øjeblikke",14,1,0,84.48695,82.67785,0,5334.995
+60,119,"Er videnskab lig religion?","Både videnskab og religion bruger personlige erfaringer som en måde at forstå tilværelsen på",13,1,0,78.09479,77.73297,0,5140.662
+61,157,"Er moderne teknologi er en ulempe for samfundet?","Teknologi har ændret hverdagen til det bedre for altid",9,1,0,51.6819,48.30491,0,4260.996
+62,116,"Er stråling fra mobiltelefoner og Wi-fi skadeligt?","Mobiltelefoner og Wi-Fi udsender ikke-ioniserende stråling, som ikke er skadelig i små doser.",14,1,0,83.40149,81.8336,0,533.332
+63,155,"Er moderne teknologi er en ulempe for samfundet?","Teknologisk tilbagestående lande har ingen magt på den globale scene",10,1,0,51.19947,53.00857,0,2073.665
+64,140,"Bør et udvælgelseslotteri være en grundlæggende del af demokratiske politiske systemer?","Der ville være mindre korruption ved lotteri, da al korruption ville forsvinde hver gang lotteriet fandt sted",16,1,0,44.80731,45.53095,0,2031.323
+65,177,"Bør dyreforsøg forbydes?","Der er foretrukne alternativer til dyreforsøg, som er mere præcise og humane",13,1,0,83.5221,84.72816,0,4165.662
+66,200,"Bør salget af genetisk modificeret mad forbydes?","Genetiske modificerede fødevarer kan være skadelige for miljøet og økosystemer",11,1,0,73.0293,71.82324,0,1556.663
+67,287,"Bør vi tilpasse os klimaforandringer i stedet for at forhindre dem?","Det er umuligt at stoppe klimaforandringerne og deres påvirkninger",10,1,0,39.50061,36.36484,0,1976.661
+68,237,"Vil menneskeskabt klimaforandring føre til menneskehedens udryddelse?","Beviser og statistikker tyder på, at de handlinger, vi foretager os, er tilstrækkelige til at håndtere større klimaforandringer",17,1,0,39.38001,41.18911,0,2575.33
+69,149,"Er moderne teknologi er en ulempe for samfundet?","Et samfund bliver sårbart ved at stole for meget på teknologi",9,1,1,76.04447,84.36634,0,1576.332
+70,229,"Vil menneskeskabt klimaforandring føre til menneskehedens udryddelse?","Konsekvenserne af global opvarmning udgør en direkte trussel mod det land og miljø, der er nødvendigt for menneskets overlevelse",16,1,0,87.62273,86.29605,0,3683.997
+71,56,"Hjælper eller skader elektroniske apparater børns udvikling?","Elektroniske apparater hjælper børn med særlige behov med at læse og skrive ligesom andre børn",12,1,0,94.61792,92.80882,0,3777.996
+72,227,"Bør brugen af plastik undgås?","Så længe det er genanvendeligt, er der intet i vejen med plastik",12,1,0,51.07887,50.83765,0,4392.329
+73,212,"Er det etisk forkert at spise kød?","At spise kød  indebærer for det meste en umoralsk og grusom behandling af dyr",15,1,0,55.54132,42.51578,0,1098.998
+74,150,"Er moderne teknologi er en ulempe for samfundet?","Teknologi gør det muligt for enkeltpersoner at eje eller kontrollere ejendom på afstand, hvilket mindsker den enkeltes direkte ansvar for ejendommen",19,1,0,43.48064,44.08367,0,2024.331
+75,216,"Er det etisk forkert at spise kød?","Smagen af kød er lækker og giver mange mennesker glæde på en måde, som vegetarisk mad ikke fuldt ud kan efterligne",20,1,0,18.39442,54.09404,0,5016.661
+76,164,"Liv vs. valg: Bør abort være lovligt?","Mennesker har ret til selvbestemmelse over deres krop og bør kunne træffe et eget valg om, hvad der sker med deres kroppe",21,1,0,81.71299,82.31603,0,884.999
+77,214,"Er det etisk forkert at spise kød?","At afslutte produktionen af kød vil være nødvendigt for at imødekomme det voksende fødevarebehov hos verdens befolkning",20,1,0,52.04372,47.21945,0,833.666
+78,24,"Er mennesker fundamentalt anderledes end andre dyr?","Mennesker har menneskelig bevidsthed, som ontologisk og fundamentalt adskiller sig fra enhver anden form for bevidsthed",16,1,0,50.95826,57.47103,0,875.665
+79,175,"Bør abort betragtes som mord?","Et foster eller en embryon er ikke en person; derfor bør abort ikke betragtes som mord.",15,1,0,97.39188,96.42702,0,374.999
+80,136,"Bør et udvælgelseslotteri være en grundlæggende del af demokratiske politiske systemer?","Politik ville være mere repræsentativt under et lotterisystem",9,1,0,58.67709,57.47103,0,1025.999
+81,101,"Er det etisk forkert at se pornografi?","Onani er naturaligt og gavnligt og her er pornografi et brugbart hjælpemiddel",12,1,0,86.65787,82.19542,0,874.665
+82,203,"Bør salget af genetisk modificeret mad forbydes?","Et universelt forbud er ikke den rigtige tilgang til at håndtere eventuelle problemer med genetisk modificerede fødevarer",17,1,0,50,50,0,649.998
+83,204,"Bør salget af genetisk modificeret mad forbydes?","GMO'er er mere omkostningseffektive end umodificerede fødevarer og medfører mange fordele",11,1,0,50,50,0,766.666
+84,128,"Er videnskab lig religion?","Der findes mange forskellige former for religioner, nogle ligner videnskab, mens andre ikke gør",16,1,0,51.32008,51.56129,1,407.999
+85,126,"Er videnskab lig religion?","Undersøgelse af definitionerne af religion viser fokus på guddommelighed og åndelighed, som slet ikke er til stede i vestlig videnskab",20,1,0,50,50,1,408.333
+86,166,"Liv vs. valg: Bør abort være lovligt?","For at opnå kønslig lighed er det fundamentalt, at individer kan kontrollere deres egen reproduktion",15,1,0,85.93423,84.60756,0,700.333
+87,60,"Hjælper eller skader elektroniske apparater børns udvikling?","Elektroniske enheder kan have en negativ indvirkning på børns sociale og psykologiske udvikling",9,1,0,94.01489,94.13549,0,533.666
+88,184,"Bør atomkraft erstatte fossile brændstoffer?","Der er bekymring vedrørende sikkerheden i forbindelse med kernekraftreaktorer og potentiel fare for aktørerne",13,1,0,88.58758,88.46697,0,982.999
+89,202,"Bør salget af genetisk modificeret mad forbydes?","Genetiske modificerede afgrøder kan bidrage til at reducere verdens sult og ernæringsmæssige mangler",12,1,0,50,50,0,609.332
+90,117,"Er videnskab lig religion?","Videnskab og religion ligner hinanden ved, at begge er blevet brugt til at forklare menneskets oprindelse",17,1,0,84.60756,85.21059,0,116.333
+91,138,"Bør et udvælgelseslotteri være en grundlæggende del af demokratiske politiske systemer?","Politikere valgt gennem lotteri ville være bedre til deres arbejde",10,1,0,39.38001,31.78178,0,424.333
+92,49,"Skabte et guddommeligt væsen universet?","Videnskaben tilbyder alternative forklaringer på universets oprindelse.",10,1,0,88.46697,88.34637,0,649.333
+93,272,"Bør der ikke være nogen begrænsning for ytringsfriheden?","Censur fører til snæversynethed, fordi det forhindrer ærlig og åben diskussion",11,1,0,84.36634,84.24574,0,1050.999
+94,233,"Vil menneskeskabt klimaforandring føre til menneskehedens udryddelse?","Menneskets evolution er langsommere end klimaforandringerne, hvilket gør det svært for mennesker at tilpasse sig klimaforandringer",20,1,0,48.30491,48.42552,0,1074.998
+95,236,"Vil menneskeskabt klimaforandring føre til menneskehedens udryddelse?","Klimaforandringer sker langsomt. Vi kan tilpasse os inde for den tidsramme",10,1,0,32.2642,37.93272,0,875.333
+96,198,"Bør sexarbejde være lovligt?","Legalisering af sexarbejde øger dets udbredelse og medfører større skade",12,1,0,37.08848,38.65636,0,625.666
+97,176,"Bør abort betragtes som mord?","At sidestille abort med mord ville få kvinder til at bruge usikre metoder og sætte deres liv i fare",17,1,0,97.39188,96.54763,0,591.999
+98,134,"Hjælper eller skader sociale medier menneskelige relationer?","Det er blevet påvist, at sociale medier kan føre til depression hos individer",9,1,0,51.6819,65.7929,0,2458.332
+99,219,"Er det etisk forkert at spise kød?","At spise kød er en integreret del af menneskets natur, evolution, fysiologi og biologi, og derfor er indtagelsen af kød naturligt for menneskeheden",20,1,0,48.78734,60.72741,0,499.666
+100,232,"Vil menneskeskabt klimaforandring føre til menneskehedens udryddelse?","Hvis afgørende tippepunkter nås, så kan sammenbrud af økosystemer føre til udryddelse af menneskeracen",18,1,0,81.23057,80.74814,0,2688.987

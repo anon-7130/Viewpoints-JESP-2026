@@ -1,0 +1,2 @@
+"n_participants","n_following","n_sharing","n_obs","leader","leader_hypothesis","runner_up","delta_BIC_runner_up","BF_leader_vs_runner_up","selected","sign_check","moderation","stopping_criterion_met"
+99,54,45,8710,"M1","H1/H2","M4",3.66797475030762,6.25879312601409,FALSE,"H1 (A > 0)","invariance supported",FALSE

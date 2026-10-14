@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <title>Instructions</title>
+</head>
+<body>
+    <section class="main" id="main">
+            <article class="article-xp-index">
+                    <form action="/instructions/" method="get">
+                        <label for="user">Participant UUID:</label><br>
+                        <input type="text" id="user" name="user" value="{{user}}" size="36" required><br>
+                        <span class="centering"><input type="submit" value="Start study"></span>
+                    </form>
+            </article>
+    </section>
+</body>
+</html>

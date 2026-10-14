@@ -1,0 +1,8 @@
+"model","hypothesis","rhs","invariant","n_par","logLik","BIC","delta_BIC","BF_leader_vs_model","BIC_weight","sign_check","singular","warnings"
+"M1","H1/H2","A + C",TRUE,8,-72850.5408074563,145773.659431471,0,1,0.851011836598044,"H1 (A > 0)",TRUE,"boundary (singular) fit: see help('isSingular')"
+"M4","baseline","D + C",TRUE,8,-72852.3747948315,145777.327406222,3.66797475030762,6.25879312601409,0.135970596800986,NA,TRUE,"boundary (singular) fit: see help('isSingular')"
+"M2","H3","A_lo + A_hi + C",TRUE,9,-72850.3924507594,145782.434945147,8.77551367593696,80.4597321850584,0.0105768663838043,"mismatch",TRUE,"boundary (singular) fit: see help('isSingular')"
+"M5","H4","D + Z + C",TRUE,9,-72852.2726749192,145786.195393467,12.535961995658,527.411457314484,0.0016135634233873,"mismatch",TRUE,"boundary (singular) fit: see help('isSingular')"
+"M0","H0","C",FALSE,7,-72862.3597220373,145788.225033564,14.5656020921888,1455.05800689746,0.0005848645432443,NA,TRUE,"boundary (singular) fit: see help('isSingular')"
+"M3","H5","C + S_lo_C + S_hi_C",FALSE,9,-72854.6387654131,145790.927574455,17.2681429834047,5619.91316500894,0.000151427933423717,"mismatch",TRUE,"boundary (singular) fit: see help('isSingular')"
+"M6","H6","C + A_lo_R + A_hi_R + S_lo_C + S_hi_C",FALSE,11,-72846.0775009276,145791.949499624,18.2900681521278,9367.8048739586,9.08443171103784e-05,"mismatch",TRUE,"boundary (singular) fit: see help('isSingular')"
